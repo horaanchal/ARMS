@@ -1,26 +1,54 @@
-CREATE TABLE [ARMS].[EmployeeRoles](
+CREATE TABLE [ARMS].[ARMSEmployee](
 	[Id] [int] IDENTITY(1,1) PRIMARY KEY,
-	[Name] [nvarchar](255) NOT NULL,
+	[SpringAheadId] [int] NULL,
+	[DivisionId] [int] NULL,
+	[UserGuid] [uniqueidentifier] NOT NULL,
+	[Initials] [nvarchar](max) NULL,
+	[FirstName] [nvarchar](max) NULL,
+	[LastName] [nvarchar](max) NULL,
+	[Username] [nvarchar](1000) NULL,
+	[Email] [nvarchar](1000) NULL,
+	[Password] [nvarchar](max) NULL,
+	[PasswordFormatId] [int] NOT NULL,
+	[PasswordSalt] [nvarchar](max) NULL,
+	[AdminComment] [nvarchar](max) NULL,
 	[Active] [bit] NOT NULL,
-	[IsSystemRole] [bit] NOT NULL,
+	[IsSystemAccount] [bit] NOT NULL,
 	[SystemName] [nvarchar](max) NOT NULL,
-	[DateCreated] [datetime] default (sysdatetime()) NOT NULL,
-	[DateModified] [datetime]default (sysdatetime()) NOT NULL,
-	[RoleOrder] [int] NULL,
- )
- Drop table ARMS.EmployeeRoles 
+	[LastIpAddress] [nvarchar](max) NULL,
+	[LastLoginDateUtc] [datetime] NULL,
+	[LastActivityDateUtc] [datetime] NOT NULL,
+	[Deleted] [bit] NOT NULL,
+	[ProfileImage] [nvarchar](max) NULL,
+	[IsAllowLogin] [bit] NOT NULL,
+	[EmployeeDetailId] [int] NULL,
+	[PasswordResetRequired] [bit] NOT NULL,
+	[Location] [int] NULL,
+	[DateCreated] [datetime] NOT NULL,
+	[DateModified] [datetime] NOT NULL,
+	[Experience] [decimal](8, 2) NULL,
+	[VisaTypeId] [int] NULL,
+	[DesignationId] [int] NULL,
+	[ResumeFileName] [nvarchar](500) NULL,
+	[OffshoreResources] [bit] NULL,
+	[NickName] [nvarchar](max) NULL,
+	[HireDate] [date] NULL,
+	[RelevantExperience] [decimal](8, 2) NULL,
+	[VisibilityRMCallender] [bit] NULL,
+	[CreatedBy] [nvarchar](50) NULL,
+	[ModifiedBy] [nvarchar](50) NULL,
+	[PreviousDesignationId] [int] NULL,
+	[IntacctId] [varchar](20) NULL,
+	)
 
+	 Drop table ARMS.ARMSEmployee
 GO
-INSERT [ARMS].[EmployeeRoles] ([Name], [Active], [IsSystemRole], [SystemName], [DateCreated], [DateModified], [RoleOrder]) VALUES (N'SuperUser', 1, 1, N'SuperUser', CAST(N'2015-07-28T11:01:14.837' AS DateTime), CAST(N'2015-07-28T11:01:14.837' AS DateTime), 1)
+INSERT [ARMS].[ARMSEmployee] ([SpringAheadId], [DivisionId], [UserGuid], [Initials], [FirstName], [LastName], [Username], [Email], [Password], [PasswordFormatId], [PasswordSalt], [AdminComment], [Active], [IsSystemAccount], [SystemName], [LastIpAddress], [LastLoginDateUtc], [LastActivityDateUtc], [Deleted], [ProfileImage], [IsAllowLogin], [EmployeeDetailId], [PasswordResetRequired], [Location], [DateCreated], [DateModified], [Experience], [VisaTypeId], [DesignationId], [ResumeFileName], [OffshoreResources], [NickName], [HireDate], [RelevantExperience], [VisibilityRMCallender], [CreatedBy], [ModifiedBy], [PreviousDesignationId], [IntacctId]) VALUES (NULL, 1, N'15df7822-4b96-46ba-9228-76cdd3f47e01', NULL, N'Anchal', N'Hora', N'horaanc', N'horaanc@cygrp.com', N'6B668EC352E39F4EE061AD696D4C0E1BA62237EA', 1, N'22YPB2c=', NULL, 1, 1, 'SuperUser', N'64.233.173.1', CAST(N'2017-11-13T16:57:53.310' AS DateTime), CAST(N'2017-11-13T16:57:54.000' AS DateTime), 0, NULL, 1, NULL, 0, 4, CAST(N'2015-07-28T07:35:06.663' AS DateTime), CAST(N'2017-11-13T16:57:54.173' AS DateTime), CAST(1.00 AS Decimal(8, 2)), NULL, NULL, N'Super_User.docx', 0, N'Super', NULL, NULL, 0, NULL, NULL, NULL, NULL)
 GO
-INSERT [ARMS].[EmployeeRoles] ([Name], [Active], [IsSystemRole], [SystemName], [DateCreated], [DateModified], [RoleOrder]) VALUES (N'Admin', 1, 1, N'Admin', CAST(N'2015-07-28T11:01:14.837' AS DateTime), CAST(N'2015-09-28T11:01:14.837' AS DateTime), 2)
+INSERT [ARMS].[ARMSEmployee] ([SpringAheadId], [DivisionId], [UserGuid], [Initials], [FirstName], [LastName], [Username], [Email], [Password], [PasswordFormatId], [PasswordSalt], [AdminComment], [Active], [IsSystemAccount], [SystemName], [LastIpAddress], [LastLoginDateUtc], [LastActivityDateUtc], [Deleted], [ProfileImage], [IsAllowLogin], [EmployeeDetailId], [PasswordResetRequired], [Location], [DateCreated], [DateModified], [Experience], [VisaTypeId], [DesignationId], [ResumeFileName], [OffshoreResources], [NickName], [HireDate], [RelevantExperience], [VisibilityRMCallender], [CreatedBy], [ModifiedBy], [PreviousDesignationId], [IntacctId]) VALUES (NULL, 2, N'15df7822-4b96-46ba-9228-76cdd3f47e01', NULL, N'Anjali', N'Hora', N'horaanj', N'horaanj@cygrp.com', N'6B668EC352E39F4EE061AD696D4C0E1BA62237EA', 1, N'22YPB2c=', NULL, 1, 1, 'Employee', N'64.233.173.1', CAST(N'2017-11-13T16:57:53.310' AS DateTime), CAST(N'2017-11-13T16:57:54.000' AS DateTime), 0, NULL, 1, NULL, 0, 4, CAST(N'2015-09-28T07:35:06.663' AS DateTime), CAST(N'2017-11-13T16:57:54.173' AS DateTime), CAST(1.00 AS Decimal(8, 2)), NULL, NULL, N'Employee_1.docx', 0, N'Super', NULL, NULL, 0, NULL, NULL, NULL, NULL)
 GO
-INSERT [ARMS].[EmployeeRoles] ([Name], [Active], [IsSystemRole], [SystemName], [DateCreated], [DateModified], [RoleOrder]) VALUES (N'Employee', 1, 1, N'Employee', CAST(N'2015-07-28T11:01:14.837' AS DateTime), CAST(N'2015-10-28T11:01:14.837' AS DateTime), 3)
-Select * from ARMS.EmployeeRoles
+INSERT [ARMS].[ARMSEmployee] ([SpringAheadId], [DivisionId], [UserGuid], [Initials], [FirstName], [LastName], [Username], [Email], [Password], [PasswordFormatId], [PasswordSalt], [AdminComment], [Active], [IsSystemAccount], [SystemName], [LastIpAddress], [LastLoginDateUtc], [LastActivityDateUtc], [Deleted], [ProfileImage], [IsAllowLogin], [EmployeeDetailId], [PasswordResetRequired], [Location], [DateCreated], [DateModified], [Experience], [VisaTypeId], [DesignationId], [ResumeFileName], [OffshoreResources], [NickName], [HireDate], [RelevantExperience], [VisibilityRMCallender], [CreatedBy], [ModifiedBy], [PreviousDesignationId], [IntacctId]) VALUES (NULL, 3, N'15df7822-4b96-46ba-9228-76cdd3f47e01', NULL, N'Ankush', N'Hora', N'horaank', N'horaank@cygrp.com', N'6B668EC352E39F4EE061AD696D4C0E1BA62237EA', 1, N'22YPB2c=', NULL, 1, 1, 'Admin', N'64.233.173.1', CAST(N'2017-11-13T16:57:53.310' AS DateTime), CAST(N'2017-11-13T16:57:54.000' AS DateTime), 0, NULL, 1, NULL, 0, 4, CAST(N'2015-10-28T07:35:06.663' AS DateTime), CAST(N'2017-11-13T16:57:54.173' AS DateTime), CAST(1.00 AS Decimal(8, 2)), NULL, NULL, N'Admin.docx', 0, N'Super', NULL, NULL, 0, NULL, NULL, NULL, NULL)
+GO
+INSERT [ARMS].[ARMSEmployee] ([SpringAheadId], [DivisionId], [UserGuid], [Initials], [FirstName], [LastName], [Username], [Email], [Password], [PasswordFormatId], [PasswordSalt], [AdminComment], [Active], [IsSystemAccount], [SystemName], [LastIpAddress], [LastLoginDateUtc], [LastActivityDateUtc], [Deleted], [ProfileImage], [IsAllowLogin], [EmployeeDetailId], [PasswordResetRequired], [Location], [DateCreated], [DateModified], [Experience], [VisaTypeId], [DesignationId], [ResumeFileName], [OffshoreResources], [NickName], [HireDate], [RelevantExperience], [VisibilityRMCallender], [CreatedBy], [ModifiedBy], [PreviousDesignationId], [IntacctId]) VALUES (NULL, 4, N'15df7822-4b96-46ba-9228-76cdd3f47e01', NULL, N'Raghav', N'Hora', N'horarag', N'horarag@cygrp.com', N'6B668EC352E39F4EE061AD696D4C0E1BA62237EA', 1, N'22YPB2c=', NULL, 1, 1, 'Employee', N'64.233.173.1', CAST(N'2017-11-13T16:57:53.310' AS DateTime), CAST(N'2017-11-13T16:57:54.000' AS DateTime), 0, NULL, 1, NULL, 0, 4, CAST(N'2015-10-28T07:35:06.663' AS DateTime), CAST(N'2017-11-13T16:57:54.173' AS DateTime), CAST(1.00 AS Decimal(8, 2)), NULL, NULL, N'Employee_2.docx', 0, N'Super', NULL, NULL, 0, NULL, NULL, NULL, NULL)
 
-update ARMS.EmployeeRoles set Name='SuperUser' 
-
-Select ARMS.EmployeeRoles.Name from ARMS.EmployeeRoles INNER JOIN ARMS.Employees On ARMS.EmployeeRoles.SystemName=ARMS.Employees.SystemName
-
-Select *from ARMS.EmployeeRoles INNER JOIN ARMS.Employees On ARMS.EmployeeRoles.SystemName=ARMS.Employees.SystemName
-
+Select * from ARMS.ARMSEmployee

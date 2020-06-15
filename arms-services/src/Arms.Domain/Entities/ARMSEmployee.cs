@@ -4,10 +4,9 @@ using Hrms.Core.Domains.Entities;
 
 namespace Arms.Domain.Entities
 {
-    public partial class Employee
+    public partial class ARMSEmployee
     {
         public int Id { get; set; }
-        public int? EmployeeDetailId { get; set; }
         public string FirstName { get; set; }
         public Guid UserGuid { get; set; }
         public string LastName { get; set; }
@@ -23,7 +22,8 @@ namespace Arms.Domain.Entities
         public int? DivisionId { get; set; }
         public DateTime? HireDate { get; set; }
         public DateTime? LastLoginDateUtc { get; set; }
-        public string Location{ get; set; }
-       
+        public string Location { get; set; }
+
     }
 }
+

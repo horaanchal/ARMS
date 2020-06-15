@@ -27,7 +27,7 @@ namespace Arms.Api.Controllers
         {
             try
             {
-                List<Location> location = _context.Loc.ToList();
+                List<Loc> location = _context.Loc.ToList();
                 var response = new
                 {
                     success = true,
@@ -63,7 +63,7 @@ namespace Arms.Api.Controllers
 
             try
             {
-               Location location = _context.Loc.
+               Loc location = _context.Loc.
                     SingleOrDefault(c => c.id == id);
 
 
@@ -114,11 +114,11 @@ namespace Arms.Api.Controllers
 
         //POST:api/Location
         [HttpPost]
-        public IActionResult CreateLocation(Location location)
+        public IActionResult CreateLocation(Loc location)
         {
             try
             {
-                Location checkinDb = _context.Loc.SingleOrDefault(c => c.locationName == location.locationName);
+                Loc checkinDb = _context.Loc.SingleOrDefault(c => c.locationName == location.locationName);
                 if (checkinDb != null)
                 {
                     var resAlreadyExists = new
@@ -132,7 +132,7 @@ namespace Arms.Api.Controllers
                     };
                     return StatusCode(400, resAlreadyExists);
                 }
-               Location locationObj = new Location
+               Loc locationObj = new Loc
                 {
                     locationName = location.locationName
                 };
@@ -168,11 +168,11 @@ namespace Arms.Api.Controllers
         }
         //PUT:api/ location/id
         [HttpPut("{id}")]
-        public IActionResult UpdateLocation(int id, Location location)
+        public IActionResult UpdateLocation(int id, Loc location)
         {
             try
             {
-               Location loc = _context.Loc.SingleOrDefault(c => c.id == id);
+               Loc loc = _context.Loc.SingleOrDefault(c => c.id == id);
                 if (loc == null)
                 {
                     var resNull = new
@@ -223,7 +223,7 @@ namespace Arms.Api.Controllers
         {
             try
             {
-                Location loc = _context.Loc.SingleOrDefault(c => c.id == id);
+                Loc loc = _context.Loc.SingleOrDefault(c => c.id == id);
                 if (loc == null)
                 {
                     var resNull = new
