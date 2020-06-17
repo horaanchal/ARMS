@@ -134,4 +134,5 @@ getInterviewById(Id): Observable<HttpResponse<any>>{
   return this.http.get<any>(`${DOTNET_DOMAIN}/api/interview/${Id}`, this.httpOptions);
 }
 
+
 }

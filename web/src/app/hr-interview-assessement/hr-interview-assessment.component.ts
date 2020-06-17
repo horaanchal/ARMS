@@ -13,13 +13,26 @@ import { IResponse} from "../models/response.interface";
   styleUrls: ["./hr-interview-assessement.component.scss"],
 })
 export class HrInterviewAssessementComponent implements OnInit {
+
+    assessment: any = {}
+    selectedItems: any;
+    events: Event[] = [];
+
+    items = [
+        {id: 1, name: 'Accepted'},
+        {id: 2, name: 'Rejected'},
+    ];
+
+
   constructor(private AppServicesService: AppServicesService,
     private router: Router,
     private modalService : NgbModal) {}
  
   ngOnInit() {}
-
-  assessment: any = {}
+ 
+  onChange(event:any) {
+   console.log(event.target.value);
+}
 
   createAssessment(assessment: IAssessment) {
     let assessmentObj = assessment;
@@ -48,5 +61,4 @@ export class HrInterviewAssessementComponent implements OnInit {
       }
     );
   }
-
 }

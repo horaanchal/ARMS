@@ -74,20 +74,17 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Round Result<span class="asterick">*</span></label>
                   <div class="col-sm-9">
-                    <select 
-                    class="form-control" 
-                    name="roundResult"
-                    [ngModel]="assessment.roundResult"
-                    #roundResult="ngModel"
-                    id="roundResult"
-                    [ngClass]="{ 'is-invalid': roundResult.dirty && roundResult.invalid }"
-                    required>
-                      <option>Accepted</option>
-                      <option>Rejected</option>
-                    </select>
-                    <div *ngIf="roundResult.dirty && roundResult.errors?.required"  class="invalid-feedback">
+                    <ng-select
+                    [items]="items"
+                    bindLabel="name"
+                    bindValue="id"
+                    placeholder="Round Result"
+                    [(ngModel)]="assessment.roundResult"
+                    (change)="onChange($event)">
+                    </ng-select>
+                    <!-- <div *ngIf="roundResult.dirty && roundResult.errors?.required"  class="invalid-feedback">
                       <div><i class="mdi mdi-alert-outline"></i>This field is required.</div>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
               </div>

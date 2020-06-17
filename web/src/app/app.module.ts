@@ -1,3 +1,5 @@
+import { SelectModule } from 'ng2-select';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule,  } from '@angular/forms';
@@ -34,6 +36,7 @@ import { EmailListModalComponent } from './email-list-modal/email-list-modal.com
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { SettingsComponent } from './settings/settings.component';
+
 
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
@@ -74,6 +77,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
   imports: [
     MDBBootstrapModule.forRoot(),
     ReactiveFormsModule,
+    NgSelectModule,
+    SelectModule,
     FormsModule,
     BrowserModule,
     AppRoutingModule,
