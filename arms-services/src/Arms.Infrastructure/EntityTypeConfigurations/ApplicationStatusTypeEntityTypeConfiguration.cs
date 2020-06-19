@@ -7,15 +7,14 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Arms.Infrastructure.EntityTypeConfigurations
 {
-    internal class ApplicationStatusTypeEntityTypeConfiguration: IEntityTypeConfiguration<ApplicationStatusType>
+    internal class ApplicationStatusTypeEntityTypeConfiguration : IEntityTypeConfiguration<ApplicationStatusType>
     {
         public void Configure(EntityTypeBuilder<ApplicationStatusType> builder)
         {
             builder.ToTable("ApplicationStatusType", "ARMS");
 
-            builder.HasIndex(e => e.StatusName)
-                .HasName("UQ__Applicat__6A50C2120E452C50")
-                .IsUnique();
+            builder.Property(e => e.StatusName)
+                .HasColumnName("statusName");
 
             builder.Property(e => e.Id).ValueGeneratedOnAdd();
 

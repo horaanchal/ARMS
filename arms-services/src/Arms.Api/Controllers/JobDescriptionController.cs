@@ -13,21 +13,25 @@ using System.Reflection.Metadata;
 using Microsoft.EntityFrameworkCore;
 using System.Net.Mail;
 using Arms.Domain.CustomEntities;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Configuration;
 
 namespace Arms.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles ="Admin")]
     public class JobDescriptionController : BaseController
     {
-        private readonly IIdentityService _identityService;
+      
         ArmsDbContext _context;
         public MailHelperController mailHelper=new MailHelperController();
-       
-        public JobDescriptionController(IIdentityService identityService, ArmsDbContext armsContext)
-        {
-            _identityService = identityService;
-            _context = armsContext;
+     
+        public JobDescriptionController(ArmsDbContext armsContext)
+        {   
+        
+             _context = armsContext;
+          
         }
         //GET:api/jobDescriptions
         [HttpGet]
@@ -39,7 +43,7 @@ namespace Arms.Api.Controllers
                     Include(l => l.eligibilityCriteria).Include(l => l.loc).ToList();
                 var response = new
                 {
-                    success = "true",
+                    success = true,
                     payload = new
                     {
                         data = jobDescriptions,
@@ -53,10 +57,10 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
-                        message = ex.InnerException.Message
+                        message = ex.InnerException
                     }
 
                 };
@@ -84,7 +88,7 @@ namespace Arms.Api.Controllers
                 {
                     var resNull = new
                     {
-                        success = "false",
+                        success = false,
                         payload = new
                         {
                             message = "This Jobdescription does not exist"
@@ -155,7 +159,7 @@ namespace Arms.Api.Controllers
                     jobTitle = job.jobTitle,
                     vacancies = job.vacancies,
                     salary = job.salary,
-                    skills=job.skills,
+                    skills = job.skills,
                     pdfBlobData = job.pdfBlobData,
 
                 };
@@ -219,6 +223,14 @@ namespace Arms.Api.Controllers
                 if (job.locationId != 0)
                     jobInDb.locationId = job.locationId;
 
+                if (job.eligibilityCriteriaId != 0)
+                    jobInDb.eligibilityCriteriaId = job.eligibilityCriteriaId;
+
+                if (job.employmentTypeId != 0)
+                    jobInDb.employmentTypeId = job.employmentTypeId;
+
+               
+
                 if (job.description != null)
                     jobInDb.description = job.description;
 
@@ -231,7 +243,7 @@ namespace Arms.Api.Controllers
                 if (job.vacancies != 0)
                     jobInDb.vacancies = job.vacancies;
 
-                if (job.salary != 0)
+                if (job.salary != null)
                     jobInDb.salary = job.salary;
 
                 _context.JobDescription.Update(jobInDb);

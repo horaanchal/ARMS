@@ -4,7 +4,7 @@ import { AppServicesService } from "src/app/services/app-services.service";
 import { Component, OnInit, Renderer2 } from "@angular/core";
 import { MsalService } from "@azure/msal-angular";
 import { EnvVarService } from "../utilities/env-var.service";
-
+import{Router} from '@angular/router'
 @Component({
   selector: "app-nav-bar",
   templateUrl: "./nav-bar.component.html",
@@ -23,12 +23,13 @@ export class AppNavBarComponent implements OnInit {
     private renderer: Renderer2,
     private authService: MsalService,
     private _service: AppServicesService,
-    private _env: EnvVarService
+    private _env: EnvVarService,
+    private router:Router
   ) {}
 
   ngOnInit() {
     let data = this._service.tokenDecoder();
-    this.name = data.name;
+    this.name = data.firstName+" "+data.lastName;
     this.role = data.role;
     if (this.role == this._env.SUPERUSER) {
       this.superuserBool = true;
@@ -56,6 +57,7 @@ export class AppNavBarComponent implements OnInit {
 
   logout() {
     this.authService.logout();
-    localStorage.removeItem("x-auth-token");
+    localStorage.removeItem("Authorized");
+    this.router.navigate(["login"]);
   }
 }

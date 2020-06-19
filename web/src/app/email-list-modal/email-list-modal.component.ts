@@ -4,7 +4,7 @@ import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstra
 import { AppServicesService } from '../services/app-services.service';
 import { ModalComponent } from '../reusable-components/modal/modal.component';
 import { HttpErrorResponse } from '@angular/common/http';
-
+import {JobService} from '../services/job.service'
 @Component({
   selector: 'app-email-list-modal',
   templateUrl: './email-list-modal.component.html',
@@ -13,7 +13,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class EmailListModalComponent implements OnInit {
 
   constructor(private _service: AppServicesService,
-              private modalService: NgbModal) { }
+              private modalService: NgbModal,
+              private jobService:JobService) { }
 
   @Input()
   jdObjId: string;
@@ -39,11 +40,12 @@ export class EmailListModalComponent implements OnInit {
   }
 
     handleSubmit() {
-      this._service.sendMails(this.emailList, this.jdObjId).subscribe((res: any) => {
+      this.jobService.sendMails(this.emailList, this.jdObjId).subscribe((res: any) => {
       this.modalClose(true);
       const modalRef = this.modalService.open(ModalComponent);
       modalRef.componentInstance.shouldConfirm = false;
-      modalRef.componentInstance.success = res.success;
+      console.log(res);
+      modalRef.componentInstance.success = res.body.success;
       modalRef.componentInstance.message = res.body.payload.message;
       modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
       modalRef.close();
