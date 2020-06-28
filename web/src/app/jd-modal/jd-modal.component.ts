@@ -18,6 +18,27 @@ import { JobService } from '../services/job.service'
   styleUrls: ["./jd-modal.component.scss"],
 })
 export class JdModalComponent implements OnInit {
+  selectedItems: any;
+    events: Event[] = [];
+    selectedSkills=[];
+
+    items = [
+        {id: 1, name: 'C'},
+        {id: 2, name: 'C++'},
+        {id: 3, name: 'Python'},
+        {id: 4, name: 'Mongo'},
+        {id: 5, name: 'NodeJS'},
+        {id: 6, name: 'Mysql'}
+    ];
+     criteria= [
+    ];
+    employment= [
+    ];
+
+   Location=[
+    ];
+   
+
   @Input()
   jdUpdateId: string;
 
@@ -58,12 +79,28 @@ export class JdModalComponent implements OnInit {
   employmentTypeId: number;
   location: string;
   eligibilityCriteria: string;
+
+  onChange(event:any) {
+    console.log(event.target.value);
+  }
+
+  onAdd=($event:any):void=> {
+    this.selectedSkills.push($event );
+    console.log(this.selectedSkills);
+  }
+
+  onRemove=($event:any):void=> {
+    console.log($event);
+    this.selectedSkills = this.selectedSkills.filter(skills=>skills.id !== $event.value.id);
+    console.log(this.selectedSkills);
+  }
+
   ngOnInit() {
     this.loadJobData(Number(this.jdUpdateId));
     this._service.getAllEligibilityCriterias().subscribe((res: any) => {
       this.eligibilityCriterias = res.payload.data;
-
     });
+
     this._service.getAllLocations().subscribe((res: any) => {
       this.locations = res.payload.data;
 

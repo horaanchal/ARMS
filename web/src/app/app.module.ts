@@ -1,5 +1,5 @@
 import { SelectModule } from 'ng2-select';
-import { NgSelectModule } from '@ng-select/ng-select';
+//import { NgSelectModule } from '@ng-select/ng-select';
 import { LocationComponent } from './settings/components/location/location.component';
 import { RoundTypeComponent } from './settings/components/round-type/round-type.component';
 import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-interview-assessment.component';
@@ -89,7 +89,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     FileUploadModule,
     MDBBootstrapModule.forRoot(),
     ReactiveFormsModule,
-    NgSelectModule,
+    //NgSelectModule,
     SelectModule,
     FormsModule,
     BrowserModule,

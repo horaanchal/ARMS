@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-<<<<<<< HEAD
-=======
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
->>>>>>> 783f81c15dc11e5edeabd1bffd95cb00cfd28157
 using Arms.Application;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;

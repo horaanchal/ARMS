@@ -23,7 +23,6 @@ export class HrInterviewAssessementComponent implements OnInit {
         {id: 2, name: 'Rejected'},
     ];
 
-
   constructor(private AppServicesService: AppServicesService,
     private router: Router,
     private modalService : NgbModal) {}
