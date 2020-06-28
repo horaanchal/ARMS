@@ -1,4 +1,6 @@
+import { UpdateInterviewComponent } from './update-interview/update-interview.component';
 import { HrInterviewAssessementComponent } from "./hr-interview-assessement/hr-interview-assessment.component";
+import { InterviewTrackerComponent } from "./interview-tracker/interview-tracker.component";
 import { SettingsComponent } from "./settings/settings.component";
 import { CreateInterviewComponent } from "./create-interview/create-interview.component";
 import { InterviewListComponent } from "./interview-list/interview-list.component";
@@ -18,13 +20,17 @@ import { RoleGuardService } from "./utilities/role-guard.service";
 import { ErrorPageComponent } from "./error-page/error-page.component";
 import { JdModalComponent } from "./jd-modal/jd-modal.component";
 import { CandidateComponent } from "./candidate/candidate.component";
+import { RoundComponent } from './round/round.component';
+import { CandidateAssessmentComponent } from "./candidate-assessment/containers/candidate-assessment.component";
+import { DashboardComponent } from "./dashboard/dashboard.component";
+import { AnalyticsComponent } from "./dashboard/analytics/analytics.component";
 
 const routes: Routes = [
   { path: "assessment", component: HrInterviewAssessementComponent },
   { path: "", redirectTo: "login", pathMatch: "full" },
   { path: "login", component: LoginComponent },
   { path: "settings", component: SettingsComponent },
-  { path: "404", component: ErrorPageComponent },
+  { path: "error/:errorCode", component: ErrorPageComponent },
   {
     path: "edit",
     component: JdModalComponent,
@@ -70,11 +76,13 @@ const routes: Routes = [
         path: "employee",
         component: EmployeeComponent,
       },
-      { 
-        path: "interviews", component: InterviewListComponent 
+      {
+        path: "interviews",
+        component: InterviewListComponent,
       },
       {
-        path: 'settings', component: SettingsComponent
+        path: "interviews",
+        component: InterviewListComponent,
       },
     ],
   },
@@ -94,10 +102,35 @@ const routes: Routes = [
         component: CandidateComponent,
       },
       {
+        path: "interviews/round/:id/:append",
+        component: RoundComponent,
+      },
+      {
         path: "create-interview",
         component: CreateInterviewComponent,
+      },{
+        path: "update-interview",
+        component: UpdateInterviewComponent,
       },
-
+      {
+        path: "interview",
+        component: InterviewTrackerComponent,
+        children: [
+          {
+            path: "",
+            redirectTo: "create",
+            pathMatch: "full",
+          },
+          {
+            path: "create",
+            component: CreateInterviewComponent,
+          },
+          {
+            path: "select-panel/:interviewId",
+            component: ScheduleInterviewComponent,
+          },
+        ],
+      },
       {
         path: "home",
         component: HrComponent,
@@ -116,6 +149,10 @@ const routes: Routes = [
         path: "interview/schedule",
         component: ScheduleInterviewComponent,
       },
+      {
+        path: "candidate",
+        children: [{ path: ":jobId", component: CandidateComponent }],
+      },
     ],
   },
   {
@@ -131,7 +168,12 @@ const routes: Routes = [
       },
       {
         path: "home",
-        component: HrComponent,
+        component: InterviewListComponent,
+      },
+      { path: "interviews", component: InterviewListComponent },
+      {
+        path: "candidate",
+        children: [{ path: ":jobId", component: CandidateComponent }],
       },
     ],
   },
@@ -162,6 +204,26 @@ const routes: Routes = [
   {
     path: "assessment",
     component: HrInterviewAssessementComponent,
+  },
+  {
+    path: "candidate-assessment/jd/:jdId/candidate/:candidateId",
+    component: AppNavBarComponent,
+    children: [
+      {
+        path: "",
+        component: CandidateAssessmentComponent,
+      },
+    ],
+  },
+  {
+    path: "dashboard",
+    component: AppNavBarComponent,
+    children: [
+      {
+        path: "",
+        component: AnalyticsComponent,
+      },
+    ],
   },
 ];
 
