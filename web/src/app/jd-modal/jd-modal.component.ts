@@ -31,11 +31,19 @@ export class JdModalComponent implements OnInit {
         {id: 6, name: 'Mysql'}
     ];
      criteria= [
+      {id: 1, name: 'Postgraduate'},
+      {id: 2, name: 'Undergraduate'},
+      {id: 3, name: 'Doctorate'}
     ];
     employment= [
+      {id: 1, name: 'Full-time'},
+      {id: 2, name: 'Part-time'},
+      {id: 3, name: 'Intern'}
     ];
 
    Location=[
+    {id: 1, name: 'Dallas'},
+    {id: 2, name: 'Noida'}
     ];
    
 

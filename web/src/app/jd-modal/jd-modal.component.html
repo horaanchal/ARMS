@@ -134,59 +134,45 @@
           <label for="eligibilityCriteria"
             ><b>Eligibility criteria</b><span class="asterick">*</span></label
           >
-          <select
-            id="eligibilityCriteria"
-            name="eligibilityCriteriaId"
+          <ng-select
+            [criteria]="criteria"
+            bindLabel="name"
+            bindValue="id"
             [(ngModel)]="jobArray.eligibilityCriteriaId"
-            type="text"
-            required
-            class="form-control form-control-lg"
             placeholder="Eligibility Criteria"
-            #eligibilityCriteria="ngModel"
+            (change)="onChange($event)"
+            (add)="onAdd($event)"
+            (remove)="onRemove($event)"
           >
-          <option class="select-css"*ngFor="let el of eligibilityCriterias" [selected]="jobArray.eligibilityCriteria.id===el.id" [value]="el.id">
-            {{ el.eligibilityCriteriaName }}
-          </option>
-      </select>
-         
+        </ng-select>   
         </div>
         <div class="form-group" *ngIf="jobArray.employmentType">
           <label for="jobType"><b>Job Type</b><span class="asterick">*</span></label>
-          <select
-            name="employmentTypeId"
-            id="jobType"
+          <ng-select
+            [employment]="employment"
+            bindLabel="name"
+            bindValue="id"
             [(ngModel)]="jobArray.employmentTypeId"
-            type="text"
-            required
-            class="form-control form-control-lg"
             placeholder="Job Type"
-            #jobType="ngModel"
-          > <option class="select-css"
-                    *ngFor="let employmentType of employmentTypes"
-                    [value]="employmentType.id"
-                    [selected]="jobArray.employmentType.id===employmentType.id"
-             >
-            {{ employmentType.employmentTypeName }}
-          </option>
-        </select>
+            (change)="onChange($event)"
+            (add)="onAdd($event)"
+            (remove)="onRemove($event)"
+          >
+        </ng-select>
         </div>
         <div class="form-group" *ngIf="jobArray.loc">
           <label for="location"><b>Location</b><span class="asterick">*</span></label>
-          <select
-            name="locationId"
-            id="location"
+          <ng-select
+            [Location]="Location"
+            bindLabel="name"
+            bindValue="id"
             [(ngModel)]="jobArray.locationId"
-            type="text"
-            required
-            class="form-control form-control-lg"
             placeholder="Location"
-            #location="ngModel"
+            (change)="onChange($event)"
+            (add)="onAdd($event)"
+            (remove)="onRemove($event)"
           >
-          <option class="select-css" *ngFor="let location of locations" [selected]="location.id === jobArray.locationId" [value]="location.id">
-            {{ location.locationName }}
-          </option>
-       </select>
-          
+        </ng-select>
         </div>
         <div class="form-group">
           <label for="salary"><b>Salary (per annum)</b></label>
