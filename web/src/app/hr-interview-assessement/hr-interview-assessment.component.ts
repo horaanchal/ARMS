@@ -20,7 +20,7 @@ export class HrInterviewAssessementComponent implements OnInit {
 
     items = [
         {id: 1, name: 'Accepted'},
-        {id: 2, name: 'Rejected'},
+        {id: 2, name: 'Rejected'}
     ];
 
   constructor(private AppServicesService: AppServicesService,
