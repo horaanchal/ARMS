@@ -1,3 +1,4 @@
+import { MinDateService } from './../utilities/min-date.service';
 
 import { JdFormComponent } from './../jd-form/jd-form.component';
 import { Component, OnInit, EventEmitter, Output, Input } from "@angular/core";
@@ -56,7 +57,8 @@ export class JdModalComponent implements OnInit {
     private router: Router,
     private modalService: NgbModal,
     private _router: Router,
-    private jobService: JobService
+    private jobService: JobService,
+    private minDateService:MinDateService
   ) { }
 
   @Output()
@@ -74,7 +76,7 @@ export class JdModalComponent implements OnInit {
   vacancies: number;
   jobArray: any;
   eligibilityCriteriaOptions: String;
-  jobId:any;
+  jobId: any;
   locationOptions: String;
   jobTypeOptions: String;
   jobListingForm: FormGroup;
@@ -103,7 +105,9 @@ export class JdModalComponent implements OnInit {
     console.log(this.selectedSkills);
   }
 
+  minimumDate:string;
   ngOnInit() {
+    this.minimumDate=this.minDateService.setMinimumDate();
     this.loadJobData(Number(this.jdUpdateId));
     this._service.getAllEligibilityCriterias().subscribe((res: any) => {
       this.eligibilityCriterias = res.payload.data;
@@ -142,8 +146,7 @@ export class JdModalComponent implements OnInit {
   }
 
   sendUpdateRequest(jdFormObject: any) {
-    jdFormObject.eligibilityCriteria
-    jdFormObject.jdId = `CYGJID${jdFormObject.jdId}`
+ 
     this.jobService.updateJobInfo(jdFormObject, this.jobArray.id).subscribe(
       (res: any) => {
         const modalRef = this.modalService.open(ModalComponent);

@@ -24,7 +24,6 @@ import { DashboardComponent } from "./dashboard/dashboard.component";
 import { EmployeeFormComponent } from "./employee/components/employee-form/employee-form.component";
 import { EmployeeUploadComponent } from "./employee/components/employee-upload/employee-upload.component";
 import { EmployeeComponent } from "./employee/containers/employee/employee.component";
-import { HrComponent } from "./hr/hr.component";
 import { JdFormComponent } from "./jd-form/jd-form.component";
 import { JdPdfComponent } from "./jd-form/jd-pdf/jd-pdf.component";
 import { JdListComponent } from "./jd-list/jd-list.component";
@@ -50,6 +49,8 @@ import { InterviewTrackerComponent } from "./interview-tracker/interview-tracker
 import { AnalyticsComponent } from "./dashboard/analytics/analytics.component";
 import { StatsComponent } from "./dashboard/stats/stats.component";
 import { CandidateDescriptionComponent } from "./candidate-assessment/components/candidate-description/candidate-description.component";
+import { InterviewDetailComponent } from './interview-detail/interview-detail.component';
+import { UpdateCandidateComponent } from './update-candidate/update-candidate.component';
 
 const isIE =
   window.navigator.userAgent.indexOf("MSIE ") > -1 ||
@@ -72,7 +73,6 @@ const isIE =
     EmployeeComponent,
     EmployeeUploadComponent,
     ModalComponent,
-    HrComponent,
     JdListComponent,
     ScheduleInterviewComponent,
     LocationComponent,
@@ -100,11 +100,13 @@ const isIE =
     ApplicationStatusComponent,
     CandidateAssessmentComponent,
     HrInterviewAssessementComponent,
+    InterviewDetailComponent,
     InterviewTrackerComponent,
     CandidateDescriptionComponent,
     DashboardComponent,
     StatsComponent,
     AnalyticsComponent,
+    UpdateCandidateComponent,
   ],
   imports: [
     FileUploadModule,
@@ -135,7 +137,8 @@ const isIE =
       },
       {
         popUp: !isIE,
-        consentScopes: ["user.read", "openid", "profile","calenders.read"],
+        consentScopes: ["user.read", "openid", "profile","calendars.read","calendars.read.shared",
+                        "calendars.readwrite","calendars.readwrite.shared"],
         unprotectedResources: [],
         protectedResourceMap: [
           ["https://graph.microsoft.com/v1.0/me", ["user.read"]],
