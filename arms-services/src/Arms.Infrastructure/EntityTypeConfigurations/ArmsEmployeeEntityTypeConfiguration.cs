@@ -5,42 +5,69 @@ using Arms.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-
 namespace Arms.Infrastructure.EntityTypeConfigurations
 {
-    internal class ArmsEmployeeEntityTypeConfiguration : IEntityTypeConfiguration<ArmsEmployees>
-
+    internal class ARMSEmployeeEntityTypeConfiguration : IEntityTypeConfiguration<Employee>
     {
-        public void Configure(EntityTypeBuilder<ArmsEmployees> builder)
+        public void Configure(EntityTypeBuilder<Employee> builder)
         {
-            builder.ToTable("ArmsEmployees", "dbo");
+            builder.ToTable("ARMSEmployee", "ARMS");
 
+            builder.Property(e => e.Id).HasColumnName("Id");
 
-            builder.Property(e => e.DateCreated).HasColumnType("datetime");
+            builder.Property(e => e.UserGuid)
+            .IsRequired()
+            .HasColumnName("UserGuid");
 
-            builder.Property(e => e.DateModified).HasColumnType("datetime");
+            builder.Property(e => e.FirstName)
+              .HasColumnName("FirstName");
 
-            builder.Property(e => e.Email).HasMaxLength(1000);
+            builder.Property(e => e.LastName)
+              .HasColumnName("LastName");
 
-            builder.Property(e => e.Experience).HasColumnType("decimal(8, 2)");
+            builder.Property(e => e.Username)
+             .HasColumnName("Username");
 
-            builder.Property(e => e.HireDate).HasColumnType("date");
+            builder.Property(e => e.Email)
+               .HasColumnName("Email");
 
-            builder.Property(e => e.IntacctId)
-                .HasMaxLength(20)
-                .IsUnicode(false);
+            builder.Property(e => e.Password)
+               .HasColumnName("Password");
 
-            builder.Property(e => e.LastActivityDateUtc).HasColumnType("datetime");
+            builder.Property(e => e.PasswordFormatId)
+               .IsRequired()
+               .HasColumnName("PasswordFormatId");
 
-            builder.Property(e => e.LastLoginDateUtc).HasColumnType("datetime");
+            builder.Property(e => e.PasswordSalt)
+              .HasColumnName("PasswordSalt");
 
-            builder.Property(e => e.RelevantExperience).HasColumnType("decimal(8, 2)");
+            builder.Property(e => e.LocationId)
+              .HasColumnName("LocationId");
 
-            builder.Property(e => e.ResumeFileName).HasMaxLength(500);
+            builder.Property(e => e.Deleted)
+              .IsRequired()
+              .HasColumnName("Deleted");
 
-            builder.Property(e => e.Username).HasMaxLength(1000);
+            builder.Property(e => e.DivisionId)
+              .HasColumnName("DivisionId");
 
-            builder.Property(e => e.VisibilityRmcallender).HasColumnName("VisibilityRMCallender");
+            builder.Property(e => e.HireDate)
+             .HasColumnName("HireDate");
+
+            builder.Property(e => e.Active)
+               .IsRequired()
+               .HasColumnName("Active");
+
+            builder.Property(e => e.SystemName)
+              .IsRequired()
+              .HasColumnName("SystemName");
+
+            builder.Property(e => e.LastLoginDateUtc)
+            .HasColumnName("LastLoginDateUtc");
+
+            builder.Property(e => e.Location)
+              .IsRequired()
+              .HasColumnName("Location");
 
 
 

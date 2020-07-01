@@ -1,5 +1,5 @@
-import { UpdateCandidateComponent } from './update-candidate/update-candidate.component';
-import { UpdateInterviewComponent } from './update-interview/update-interview.component';
+import { UpdateInterviewComponent } from "./update-interview/update-interview.component";
+import { UpdateCandidateComponent } from "./update-candidate/update-candidate.component";
 import { HrInterviewAssessementComponent } from "./hr-interview-assessement/hr-interview-assessment.component";
 import { InterviewTrackerComponent } from "./interview-tracker/interview-tracker.component";
 import { SettingsComponent } from "./settings/settings.component";
@@ -20,12 +20,11 @@ import { RoleGuardService } from "./utilities/role-guard.service";
 import { ErrorPageComponent } from "./error-page/error-page.component";
 import { JdModalComponent } from "./jd-modal/jd-modal.component";
 import { CandidateComponent } from "./candidate/candidate.component";
-import { Z_FULL_FLUSH } from 'zlib';
-import { RoundComponent } from './round/round.component';
+import { Z_FULL_FLUSH } from "zlib";
+import { RoundComponent } from "./round/round.component";
 import { CandidateAssessmentComponent } from "./candidate-assessment/containers/candidate-assessment.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { AnalyticsComponent } from "./dashboard/analytics/analytics.component";
-
 
 const routes: Routes = [
   { path: "assessment", component: HrInterviewAssessementComponent },
@@ -79,8 +78,23 @@ const routes: Routes = [
         component: InterviewListComponent,
       },
       {
-        path: "interviews",
-        component: InterviewListComponent,
+        path: "interview",
+        component: InterviewTrackerComponent,
+        children: [
+          {
+            path: "",
+            redirectTo: "create",
+            pathMatch: "full",
+          },
+          {
+            path: "create",
+            component: CreateInterviewComponent,
+          },
+          {
+            path: "select-panel/:jobId/:interviewId",
+            component: ScheduleInterviewComponent,
+          },
+        ],
       },
     ],
   },
@@ -98,10 +112,6 @@ const routes: Routes = [
       {
         path: "candidate",
         component: CandidateComponent,
-      },
-      {
-        path: "update-candidate",
-        component: UpdateCandidateComponent,
       },
       {
         path: "interviews/round/:id/:append",
@@ -129,7 +139,7 @@ const routes: Routes = [
             component: CreateInterviewComponent,
           },
           {
-            path: "select-panel/:interviewId",
+            path: "select-panel/:jobId/:interviewId",
             component: ScheduleInterviewComponent,
           },
         ],
@@ -191,16 +201,22 @@ const routes: Routes = [
   {
     path: "progressTracker",
     children: [
-    {
-      path: ':candidateId',
-      pathMatch: 'full',
-      component: ProgressTrackerComponent
-    },
-    { 
-      path: ":candidateId/applied", component: ProgressTrackerComponent, children: [{
-        path: '', component: CandidateFormComponent
-      }] 
-    }],
+      {
+        path: ":candidateId",
+        pathMatch: "full",
+        component: ProgressTrackerComponent,
+      },
+      {
+        path: ":candidateId/applied",
+        component: ProgressTrackerComponent,
+        children: [
+          {
+            path: "",
+            component: CandidateFormComponent,
+          },
+        ],
+      },
+    ],
   },
   {
     path: "panel",
@@ -234,15 +250,17 @@ const routes: Routes = [
   {
     path: "dashboard",
     component: AppNavBarComponent,
-    children: [{
-      path: '',
-      component: DashboardComponent
-    }]
-  }
+    children: [
+      {
+        path: "",
+        component: DashboardComponent,
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
